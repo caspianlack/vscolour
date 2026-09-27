@@ -9,7 +9,7 @@
     2. Writes it into <folder>\.vscode\settings.json under "workbench.colorCustomizations".
        Only that block is replaced; the rest of the file (including comments) is kept.
     3. Recolours VS Code's own code.ico to the same hue, keeping the logo's brightness and gradients.
-    4. Creates <folder>\<folder name>.lnk, which runs cmd /c "code "<folder>"" with that icon.
+    4. Creates <folder>\<folder name>.lnk, which opens the folder in VS Code (Code.exe "<folder>") with that icon.
 
     Without -Path it works on the git repo you're in (or the current directory if it isn't a repo).
     Leave out the colour to reuse the folder's current one, or to pick one from a dialog if it has none.
@@ -644,9 +644,8 @@ try {
         $hotkeyDir = if ($targets.Count -gt 1) { $targets[1] } else { $targets[0] }
         foreach ($dir in $targets) {
             $key = if ($dir -eq $hotkeyDir) { $Hotkey } else { '' }
-            # cmd /c "code "<repo>"", started minimised so the console barely flashes.
-            $cmd = Join-Path $env:SystemRoot 'System32\cmd.exe'
-            $done += 'Shortcut -> ' + (New-Shortcut (Join-Path $dir "$Name.lnk") $cmd "/c `"code `"$Path`"`"" $icon $Path $key 7)
+            # Code.exe "<repo>" directly: going through cmd /c code would open a console window as well.
+            $done += 'Shortcut -> ' + (New-Shortcut (Join-Path $dir "$Name.lnk") $CodeExe "`"$Path`"" $icon $Path $key)
         }
         Update-ShellIcons
     }

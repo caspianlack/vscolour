@@ -114,7 +114,7 @@ Only the `workbench.colorCustomizations` block in `settings.json` is replaced. Y
 
 **Icon.** The script takes the `code.ico` that ships with your VS Code install and replaces its blue with your colour's hue. Each pixel keeps its original brightness, so the logo stays readable even when the background colour is very dark. Each icon file name includes the colour and a content hash, so Windows can't keep showing an older cached icon.
 
-**Shortcut.** The shortcut runs `cmd.exe /c "code "<repo>""`, minimised so no console window flashes up. The *Font*, *Layout* and *Colors* tabs in the shortcut's Properties belong to that brief console window and don't affect VS Code.
+**Shortcut.** The shortcut starts `Code.exe "<repo>"` directly, so only VS Code opens, with no console window.
 
 ## Files
 
