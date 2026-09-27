@@ -1,0 +1,3 @@
+#!/bin/sh
+# Git Bash wrapper for VSColour.ps1. Put this folder on your PATH, then run `vscolour` inside any repo.
+exec powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$(cd "$(dirname "$0")" && pwd -W)/VSColour.ps1" "$@"
